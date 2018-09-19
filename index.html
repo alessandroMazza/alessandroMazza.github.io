@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<script type="text/javascript" src="http://52.57.148.181:9000/spotfire/wp/GetJavaScriptApi.ashx?Version=7.11"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script  type="text/javascript">
+   var c_serverUrl = "http://52.57.148.181:9000/spotfire/wp/";
+   var c_analysisPath = "/IFIS_Analytics_DEV/Test";
+   var customizationInfo;
+    
+   var openApplication = function(){ 
+    var customization = new spotfire.webPlayer.Customization();
+    customization.showCustomizableHeader = false;
+    customization.showTopHeader = false;
+    customization.showClose = false;
+    customization.showAnalysisInfo = false;
+    customization.showToolBar = false;
+    customization.showExportFile = false;
+    customization.showExportVisualization = false;
+    customization.showUndoRedo = false;
+    customization.showDodPanel = false;
+    customization.showFilterPanel = true;
+    customization.showPageNavigation = true;
+    customization.showStatusBar = false;
+
+	app = new spotfire.webPlayer.Application(c_serverUrl, customization, c_analysisPath, "", true);
+
+    var onError = function(errorCode, description)
+    {
+        log('<span style="color: red;">[' + errorCode + "]: " + description + "</span>");
+    };
+
+    var onOpened = function(analysisDocument)
+    {
+        console.log("opened");
+    };
+
+    app.onError(onError);
+    app.onOpened(onOpened);
+    doc = app.openDocument("container");
+};
+    $(window).on('load', function() {
+            openApplication();
+       });
+	                
+                   			
+</script>
+</HEAD>
+ 
+<BODY> 
+  <div id="container"></div>
+</BODY>
+</HTML>
